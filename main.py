@@ -26,7 +26,7 @@ def get_image_url():
         print(file_extension)
     return url
 
-def bop(bot, update):
+def dog(bot, update):
     url = get_image_url()
     chat_id = update.message.chat_id
     bot.send_photo(chat_id=chat_id, photo=url)
@@ -42,10 +42,10 @@ def panda(bot, update):
     bot.send_photo(chat_id=chat_id, photo=url)
 
 def main():
-    updater = Updater('1035906504:AAHTStBWmmjkz-BIky-ZRtIJD90LYbSJL3A')
+    updater = Updater('1028460771:AAG1LRVt2ldOdLXS8gm_Ayi5GjOXvwViXUM')
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler('bop',bop))
+    dp.add_handler(CommandHandler('dog',dog))
     dp.add_handler(CommandHandler('cat', cat))
     dp.add_handler(CommandHandler('panda', panda))
 
