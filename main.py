@@ -51,7 +51,7 @@ def get_image_dog():
     return url
 
 
-token = '1035906504:AAHTStBWmmjkz-BIky-ZRtIJD90LYbSJL3A'
+token = '1003320386:AAHiOT1XtiPyXaTzCHkyJuqP6lweEHagdx4'
 
 bot = telebot.TeleBot(token)
 
@@ -66,7 +66,7 @@ def inline(message):
     koala_button = types.InlineKeyboardButton(text='Koala', callback_data='koala')
     fox_button = types.InlineKeyboardButton(text='Fox', callback_data='fox')
     key.add(cat_button, dog_button, panda_button, red_panda_button, fox_button, koala_button)
-    bot.send_message(message.chat.id, 'Select your pat', reply_markup=key)
+    bot.send_message(message.chat.id, 'Select your pet', reply_markup=key)
     print(message)
 
 
@@ -83,22 +83,22 @@ def answer(c):
 
     if c.data == 'cat':
         bot.send_photo(c.message.chat.id, photo=get_url_cats())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
     elif c.data == 'dog':
         bot.send_photo(c.message.chat.id, photo=get_image_dog())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
     elif c.data == 'panda':
         bot.send_photo(c.message.chat.id, photo=get_url_panda())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
     elif c.data == 'red_panda':
         bot.send_photo(c.message.chat.id, photo=get_url_red_panda())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
     elif c.data == 'fox':
         bot.send_photo(c.message.chat.id, photo=get_url_fox())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
     elif c.data == 'koala':
         bot.send_photo(c.message.chat.id, photo=get_url_koala())
-        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+        bot.send_message(c.message.chat.id, 'Select your pet', reply_markup=key)
 
 
 if __name__ == '__main__':
