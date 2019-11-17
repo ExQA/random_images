@@ -1,3 +1,4 @@
+telebot
 argh==0.26.2
 certifi==2019.9.11
 cffi==1.13.2

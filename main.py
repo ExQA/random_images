@@ -1,60 +1,107 @@
-from telegram.ext import Updater, CommandHandler
+from telegram import bot
+import telebot
+from telebot import types
 import requests
 import re
 
-def get_url():
+
+def get_url_dog():
     contents = requests.get('https://random.dog/woof.json').json()
     url = contents['url']
     return url
+
 
 def get_url_cats():
     contents = requests.get('https://some-random-api.ml/img/cat').json()
     url = contents['link']
     return url
 
-def get_url_pandas():
+
+def get_url_panda():
     contents = requests.get('https://some-random-api.ml/img/panda').json()
     url = contents['link']
     return url
 
-def get_image_url():
-    allowed_extension = ['jpg','jpeg','png']
+
+def get_url_red_panda():
+    content = requests.get('https://some-random-api.ml/img/red_panda').json()
+    url = content['link']
+    return url
+
+
+def get_url_fox():
+    content = requests.get('https://some-random-api.ml/img/fox').json()
+    url = content['link']
+    return url
+
+
+def get_url_koala():
+    content = requests.get('https://some-random-api.ml/img/koala').json()
+    url = content['link']
+    return url
+
+
+def get_image_dog():
+    allowed_extension = ['jpg', 'jpeg', 'png']
     file_extension = ''
     while file_extension not in allowed_extension:
-        url = get_url()
-        file_extension = re.search("([^.]*)$",url).group(1).lower()
+        url = get_url_dog()
+        file_extension = re.search("([^.]*)$", url).group(1).lower()
         print(file_extension)
     return url
 
-def dog(bot, update):
-    url = get_image_url()
-    chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=url)
 
-def cat(bot, update):
-    url = get_url_cats()
-    chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=url)
+token = '1035906504:AAHTStBWmmjkz-BIky-ZRtIJD90LYbSJL3A'
 
-def panda(bot, update):
-    url = get_url_pandas()
-    chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=url)
+bot = telebot.TeleBot(token)
 
-def main():
-    updater = Updater('1028460771:AAG1LRVt2ldOdLXS8gm_Ayi5GjOXvwViXUM')
-    dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler('dog',dog))
-    dp.add_handler(CommandHandler('cat', cat))
-    dp.add_handler(CommandHandler('panda', panda))
+@bot.message_handler(commands=["start"])
+def inline(message):
+    key = types.InlineKeyboardMarkup()
+    cat_button = types.InlineKeyboardButton(text='Cat', callback_data='cat')
+    dog_button = types.InlineKeyboardButton(text='Dog', callback_data='dog')
+    panda_button = types.InlineKeyboardButton(text='Panda', callback_data='panda')
+    red_panda_button = types.InlineKeyboardButton(text='Red Panda', callback_data='red_panda')
+    koala_button = types.InlineKeyboardButton(text='Koala', callback_data='koala')
+    fox_button = types.InlineKeyboardButton(text='Fox', callback_data='fox')
+    key.add(cat_button, dog_button, panda_button, red_panda_button, fox_button, koala_button)
+    bot.send_message(message.chat.id, 'Select your pat', reply_markup=key)
+    print(message)
 
-    updater.start_polling()
-    updater.idle()
+
+@bot.callback_query_handler(func=lambda c: True)
+def answer(c):
+    key = types.InlineKeyboardMarkup()
+    cat_button = types.InlineKeyboardButton(text='Cat', callback_data='cat')
+    dog_button = types.InlineKeyboardButton(text='Dog', callback_data='dog')
+    panda_button = types.InlineKeyboardButton(text='Panda', callback_data='panda')
+    red_panda_button = types.InlineKeyboardButton(text='Red Panda', callback_data='red_panda')
+    koala_button = types.InlineKeyboardButton(text='Koala', callback_data='koala')
+    fox_button = types.InlineKeyboardButton(text='Fox', callback_data='fox')
+    key.add(cat_button, dog_button, panda_button, red_panda_button, fox_button, koala_button)
+
+    if c.data == 'cat':
+        bot.send_photo(c.message.chat.id, photo=get_url_cats())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+    elif c.data == 'dog':
+        bot.send_photo(c.message.chat.id, photo=get_image_dog())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+    elif c.data == 'panda':
+        bot.send_photo(c.message.chat.id, photo=get_url_panda())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+    elif c.data == 'red_panda':
+        bot.send_photo(c.message.chat.id, photo=get_url_red_panda())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+    elif c.data == 'fox':
+        bot.send_photo(c.message.chat.id, photo=get_url_fox())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+    elif c.data == 'koala':
+        bot.send_photo(c.message.chat.id, photo=get_url_koala())
+        bot.send_message(c.message.chat.id, 'Select your pat', reply_markup=key)
+
 
 if __name__ == '__main__':
-    main()
-
-
+    bot.polling(none_stop=True)
 
     # https://some-random-api.ml/
