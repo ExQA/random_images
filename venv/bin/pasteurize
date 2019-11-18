@@ -1,4 +1,4 @@
-#!/Users/denissv/Documents/random_images/venv/bin/python
+#!/Users/denys/Documents/random_images/venv/bin/python
 # EASY-INSTALL-ENTRY-SCRIPT: 'future==0.18.2','console_scripts','pasteurize'
 __requires__ = 'future==0.18.2'
 import re

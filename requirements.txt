@@ -14,9 +14,9 @@ pymongo==3.7.2
 pyTelegramBotAPI==3.6.6
 python-telegram-bot==12.2.0
 PyYAML==5.1.2
-requests==2.20.0
+requests
 six==1.13.0
-telebot==0.0.3
-telegram==0.0.1
+telebot
+telegram
 tornado==6.0.3
 urllib3==1.24.3

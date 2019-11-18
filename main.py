@@ -12,7 +12,7 @@ def get_url_dog():
 
 
 def get_url_cats():
-    contents = requests.get('https://some-random-api.ml/img/cat').json()
+    contents = requests.get('http://some-random-api.ml/img/cat').json()
     url = contents['link']
     return url
 
