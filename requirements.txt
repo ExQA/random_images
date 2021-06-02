@@ -19,4 +19,4 @@ six==1.13.0
 telebot
 telegram
 tornado==6.0.3
-urllib3==1.24.3
+urllib3==1.26.5
